@@ -1,0 +1,24 @@
+import java.io.IOException;  
+import java.nio.channels.SocketChannel;  
+
+public class Acceptor implements Runnable{  
+    private Reactor reactor;  
+    public Acceptor(Reactor reactor){  
+        this.reactor=reactor;  
+    }  
+    @Override  
+    public void run() {  
+        try {  
+            SocketChannel socketChannel=reactor.serverSocketChannel.accept();  
+            if(socketChannel!=null)//调用Handler来处理channel  
+                new SocketReadHandler(reactor.selector, socketChannel);  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+}
+--------------------- 
+作者：笑破苍穹 
+来源：CSDN 
+原文：https://blog.csdn.net/u010168160/article/details/53019039 
+版权声明：本文为博主原创文章，转载请附上博文链接！

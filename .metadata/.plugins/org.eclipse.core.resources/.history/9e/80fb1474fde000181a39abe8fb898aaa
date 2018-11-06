@@ -1,0 +1,51 @@
+package com.gupao.netty.reactor;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+
+public class ReactorTest {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		new Thread(new Reactor(7777)).start();
+
+		Thread.sleep(100);
+
+		new Thread(new Runnable() {
+
+			public void run() {
+				SocketChannel socketChannel = null;
+				try {
+					socketChannel = SocketChannel.open();
+					//建立一个通道连接
+					socketChannel.connect(new InetSocketAddress(InetAddress.getLocalHost(), 7777));
+					
+					String newData = "New String to write to file..." + System.currentTimeMillis();
+
+					ByteBuffer buf = ByteBuffer.allocate(48);
+					buf.clear();
+					buf.put(newData.getBytes());
+					buf.flip();
+					
+					while (buf.hasRemaining()) {
+						socketChannel.write(buf);
+					}
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						socketChannel.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+			}
+		}).start();
+
+	}
+
+}

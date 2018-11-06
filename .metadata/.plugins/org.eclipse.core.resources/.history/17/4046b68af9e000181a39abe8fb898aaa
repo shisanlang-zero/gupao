@@ -1,0 +1,12 @@
+package com.gupao.netty.reactor;
+
+import java.io.IOException;
+
+public class ReactorTest {
+
+	public static void main(String[] args) throws IOException {
+		new Thread(new Reactor(7777)).start();
+
+	}
+
+}

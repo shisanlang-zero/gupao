@@ -1,0 +1,15 @@
+package com.skynet.zero.test;
+
+import com.skynet.zero.util.BeanOperation;
+
+public class TestFiledOperation {
+	private static Employee emp = new Employee();
+	
+	public static void main(String[] args) {
+		String attributeName = "emp.dept.company.name"; 
+		String value ="zero是你";
+		
+		BeanOperation bo = new BeanOperation(emp, attributeName, value);
+		
+	}
+}

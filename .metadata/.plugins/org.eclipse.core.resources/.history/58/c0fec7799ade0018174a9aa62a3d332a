@@ -1,0 +1,58 @@
+public class ServerHandler implements Runnable {
+
+    private Socket socket;
+
+    public ServerHandler(Socket socket) {
+        this.socket = socket;
+    }
+
+    @Override
+    public void run() {
+        BufferedReader in = null;
+        PrintWriter out = null;
+        BufferedReader reader = null;
+        try {
+            in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            out = new PrintWriter(this.socket.getOutputStream(), true);
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            String body = null;
+            while (true) {
+                body = in.readLine();
+                if (body == null) break;
+                System.out.println("Server :" + body);
+                //out.println("服务器端回送响的应数据.");
+                out.println(reader.readLine());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (socket != null) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            socket = null;
+        }
+    }
+}
+--------------------- 
+作者：梦想远航 
+来源：CSDN 
+原文：https://blog.csdn.net/qq_31617121/article/details/80839171 
+版权声明：本文为博主原创文章，转载请附上博文链接！

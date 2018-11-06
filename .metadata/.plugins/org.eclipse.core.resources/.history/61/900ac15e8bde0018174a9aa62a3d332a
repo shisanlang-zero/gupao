@@ -1,0 +1,7 @@
+package com.gupao.netty.client;
+
+public class BioClient {
+	//端口
+	private int defaultPort = 7777;
+
+}

@@ -1,0 +1,37 @@
+package com.gupao.netty.server;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+
+/**
+ * BIO服务器端
+ * @author Administrator
+ *
+ */
+public class BioServier {
+	private int defaultPort = 7777;
+	
+	private  ServerSocket serverSocket;
+	
+	public void bioStart() throws IOException {
+		start(defaultPort);
+	}
+
+	private void start(int port) throws IOException {
+		if(serverSocket != null) {
+			return;
+		}
+		
+		try {
+			serverSocket = new ServerSocket(port);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if(serverSocket != null) {
+				serverSocket.close();
+			}
+		}
+		
+	}
+
+}

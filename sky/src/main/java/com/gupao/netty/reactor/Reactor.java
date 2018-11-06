@@ -1,0 +1,87 @@
+package com.gupao.netty.reactor;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.util.Iterator;
+import java.util.Set;
+
+/***
+ * @ 模拟Reactor模式
+ * 1.创建一个信道通道，并初始化属性
+ * 2.将该通道注册到selector上
+ * 3.
+ *
+ */
+public class Reactor implements Runnable {
+	public final Selector selector;
+	public final ServerSocketChannel serverSocketChannel;
+
+	public Reactor(int port) throws IOException {
+		selector = Selector.open();
+		System.out.println("获取一个选择器");
+		//获取一个通道
+		serverSocketChannel = ServerSocketChannel.open();
+		System.out.println("获取一个通道");
+		//初始化ip地址和端口
+		InetSocketAddress inetSocketAddress = new InetSocketAddress(InetAddress.getLocalHost(), port);
+		//绑定
+		serverSocketChannel.socket().bind(inetSocketAddress);
+		// 设置套接字通道为非阻塞模式
+		serverSocketChannel.configureBlocking(false);
+		// 向selector注册该channel
+		SelectionKey selectionKey = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+//		SelectionKey selectionKey = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT | SelectionKey.OP_READ);
+//		SelectionKey selectionKey = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT, new Acceptor(this));
+		System.out.println("向selector注册该channel");
+		// 利用selectionKey的attache功能绑定Acceptor监听器， 如果有事件，触发Acceptor
+		System.out.println("-----------------start------向selectionKey邦定一个Acceptor------------------------");
+		selectionKey.attach(new Acceptor(this));
+		System.out.println("-----------------end------向selectionKey邦定一个Acceptor------------------------");
+	}
+
+	public void run() {
+		try {
+			while (!Thread.interrupted()) {
+				//轮询检查是否有可执行的操作，此处动作是同步的，会阻塞，select()阻塞到至少有一个通道在你注册的事件上就绪了。
+				int n = selector.select();
+				//select(long timeout)和select()一样，除了最长会阻塞timeout毫秒(参数)。 
+//				int k = selector.select(100);
+				//selectNow()不会阻塞，不管什么通道就绪都立刻返回。如果自从前一次选择操作后，没有通道变成可选择的，则此方法直接返回零。
+				int y = selector.selectNow();
+				System.out.println("轮询检查是否有可执行的操作，此处动作是同步的，会阻塞,检查结果为：" + n);
+				Set<SelectionKey> selectionKeys = selector.selectedKeys();
+				Iterator<SelectionKey> it = selectionKeys.iterator();
+				// Selector如果发现channel有OP_ACCEPT或READ事件发生，下列遍历就会进行。
+				System.out.println("遍历轮询的结果");
+				while (it.hasNext()) {
+					// 来一个事件 第一次触发一个accepter线程
+					// 以后触发SocketReadHandler
+					SelectionKey selectionKey = it.next();
+					dispatch(selectionKey);
+					selectionKeys.clear();
+//					selectionKeys.remove(selectionKey);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 运行Acceptor或SocketReadHandler
+	 * 
+	 * @param key
+	 */
+	void dispatch(SelectionKey key) {
+		System.out.println("开始进行分发给特定的handler来执行");
+		Runnable r = (Runnable) (key.attachment());
+		if (r != null) {
+			r.run();
+		}
+	}
+
+}

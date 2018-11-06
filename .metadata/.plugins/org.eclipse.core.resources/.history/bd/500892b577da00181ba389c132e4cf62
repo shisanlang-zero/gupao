@@ -1,0 +1,16 @@
+package com.skynet.zero.test;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@SuppressWarnings("serial")
+public class Employee implements Serializable {
+	private Integer empno;
+	private Double sal;
+	private Date tiem;
+	private String ename;
+	private String msg[];
+	private Integer id[];
+	private Dept dept = new Dept();
+	
+}

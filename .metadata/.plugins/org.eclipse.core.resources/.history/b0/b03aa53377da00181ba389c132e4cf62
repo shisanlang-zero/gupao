@@ -1,0 +1,10 @@
+package com.skynet.zero.test;
+
+import java.io.Serializable;
+
+public class Dept implements Serializable {
+	private Integer deptNo;
+	private String dname;
+	private String loc;
+	private Company company = new Company();
+}

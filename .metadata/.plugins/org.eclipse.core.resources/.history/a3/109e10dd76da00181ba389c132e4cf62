@@ -1,0 +1,38 @@
+package com.skynet.zero.test;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@SuppressWarnings("serial")
+public class Company implements Serializable {
+	public String name;
+	private int id ;
+	private double qty;
+	private Date date;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public double getQty() {
+		return qty;
+	}
+	public void setQty(double qty) {
+		this.qty = qty;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	
+}

@@ -1,0 +1,18 @@
+package com.gupao.netty.reactor;
+
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+
+public class Client {
+	
+	SocketChannel socketChannel;
+	String newData = "New String to write to file..." + System.currentTimeMillis();
+	
+	ByteBuffer buf = ByteBuffer.allocate(48);
+	buf.
+//	buf.clear();
+//	buf.put(newData.getBytes());
+//	buf.flip();
+	
+
+}

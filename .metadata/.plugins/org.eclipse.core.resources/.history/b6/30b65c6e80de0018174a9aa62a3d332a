@@ -1,0 +1,24 @@
+package com.gupao.netty.server;
+
+import java.net.ServerSocket;
+
+/**
+ * BIO服务器端
+ * @author Administrator
+ *
+ */
+public class BioServier {
+	private int defaultPort = 7777;
+	
+	private  ServerSocket serverSocket;
+	
+	public void bioStart() {
+		start(defaultPort);
+	}
+
+	private void start(int port) {
+		
+		
+	}
+
+}

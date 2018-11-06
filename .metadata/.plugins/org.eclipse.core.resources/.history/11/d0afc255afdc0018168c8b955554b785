@@ -1,0 +1,28 @@
+package com.skynet.zero.test;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+
+import com.skynet.zero.util.BeanOperation;
+
+public class TestFiledOperation {
+	private static Employee emp = new Employee();
+	
+	public static void main(String[] args) throws Exception {
+//		String attributeName = "emp.dept.company.name"; 
+		String attributeName = "emp.msg"; 
+//		String attributeName = "emp.dept.deptNo"; 
+		String value[] = {"1","2","3"};
+//		String value ="100";
+		Field field = emp.getClass().getDeclaredField("msg");
+		
+		
+		BeanOperation bo = new BeanOperation(emp, attributeName, value);
+		System.out.println(bo.getCurrenObj());
+		System.out.println(bo.getField());
+//		System.out.println(emp.getDept().getCompany().getName());
+//		System.out.println(emp.getSal());
+//		System.out.println(emp.getMsg());
+		System.out.println(Arrays.toString(emp.getMsg()));
+	}
+}

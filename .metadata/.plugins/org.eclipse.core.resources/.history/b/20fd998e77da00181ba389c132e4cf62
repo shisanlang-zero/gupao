@@ -1,0 +1,7 @@
+package com.skynet.zero.test;
+
+import java.io.Serializable;
+
+public class Employee implements Serializable {
+
+}

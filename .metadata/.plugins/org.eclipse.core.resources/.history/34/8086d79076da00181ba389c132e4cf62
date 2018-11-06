@@ -1,0 +1,11 @@
+package com.skynet.zero.test;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Company implements Serializable {
+	public String name;
+	private int id ;
+	private double qty;
+	private Date date;
+}

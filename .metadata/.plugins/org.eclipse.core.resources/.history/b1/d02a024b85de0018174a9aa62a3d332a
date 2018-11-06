@@ -1,0 +1,23 @@
+package com.gupao.netty.server;
+
+import java.net.Socket;
+
+/**
+  * 业务处理了逻辑操作类
+ * @author Administrator
+ *
+ */
+public class BioServerHandler implements Runnable {
+	
+	private Socket socket;
+
+	public BioServerHandler(Socket socket) {
+		this.socket = socket;
+	}
+
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

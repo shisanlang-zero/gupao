@@ -1,0 +1,24 @@
+package com.gupao.netty.test;
+
+import java.io.IOException;
+
+import com.gupao.netty.server.BioServier;
+
+public class BioTest {
+
+	public static void main(String[] args) {
+		new Thread(new Runnable() {
+			
+			public void run() {
+				try {
+					BioServier.bioStart();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}).start();
+
+	}
+
+}

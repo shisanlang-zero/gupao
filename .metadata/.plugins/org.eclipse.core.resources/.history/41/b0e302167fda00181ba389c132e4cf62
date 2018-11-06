@@ -1,0 +1,9 @@
+package com.skynet.zero.test;
+
+public class TestFiledOperation {
+	private static Employee emp = new Employee();
+	
+	public static void main(String[] args) {
+		String attributeName = "emp.dept.company.name"; 
+	}
+}

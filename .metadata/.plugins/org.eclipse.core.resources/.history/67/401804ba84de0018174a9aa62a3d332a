@@ -1,0 +1,10 @@
+package com.gupao.netty.server;
+
+public class BioServerHandler implements Runnable {
+
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

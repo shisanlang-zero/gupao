@@ -1,0 +1,19 @@
+package com.gupao.netty.client;
+
+public class BioClient {
+	//端口
+	private int defaultPort = 7777;
+	//IP
+	private String defaultIp = "127.0.0.1";
+
+	public void bioSend(String exprssion) {
+		send(defaultPort, defaultIp, exprssion);
+	}
+
+	private void send(int defaultPort2, String defaultIp2) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

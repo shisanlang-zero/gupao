@@ -1,0 +1,23 @@
+package com.skynet.zero.test;
+
+public class TestReflex {
+	
+	interface message{
+		public static final String msg ="hello world";
+	}
+	
+	abstract class info {
+		public static final String city ="北京";
+		public String id = "14521035555555";
+	}
+	
+	class dept extends info implements message {
+		public String dname;
+	}
+	
+	public static void main(String[] args) throws Exception {
+		Class<?> cls = Class.forName("com.skynet.zero.test.dept");
+		
+	}
+
+}

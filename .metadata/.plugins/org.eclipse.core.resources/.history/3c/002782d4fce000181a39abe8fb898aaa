@@ -1,0 +1,26 @@
+package com.gupao.netty.reactor;
+
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+
+public class Client implements Runnable{
+	
+	public static void main(String[] args) {
+		ByteBuffer buf = ByteBuffer.allocate(48);
+		buf.clear();
+		buf.put(newData.getBytes());
+		buf.flip();
+	}
+	
+	public SocketChannel socketChannel;
+	public String newData = "New String to write to file..." + System.currentTimeMillis();
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+
+	
+
+}

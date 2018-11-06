@@ -1,0 +1,29 @@
+package com.gupao.netty.client;
+
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class BioClient {
+	//端口
+	private int defaultPort = 7777;
+	//IP
+	private String defaultIp = "127.0.0.1";
+
+	public void bioSend(String exprssion) {
+		send(defaultPort, exprssion);
+	}
+
+	private void send(int port, String exprssion) {
+		System.out.println("开始封装请求信息");
+		//向服务器段建立请求连接
+		try {
+			Socket socket = new Socket(defaultIp, port);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+}

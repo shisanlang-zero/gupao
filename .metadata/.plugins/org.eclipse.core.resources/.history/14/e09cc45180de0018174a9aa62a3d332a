@@ -1,0 +1,11 @@
+package com.gupao.netty.server;
+
+/**
+ * BIO服务器端
+ * @author Administrator
+ *
+ */
+public class BioServier {
+	private int defaultPort = 7777;
+
+}

@@ -1,0 +1,5 @@
+package com.gupao.netty.client;
+
+public class BioClient {
+
+}
